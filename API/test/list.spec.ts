@@ -1,26 +1,30 @@
-import axios, { AxiosResponse } from 'axios'
+import UsersClient from '../client/users'
+import { usersList } from '../data/enums/users'
 import { User } from '../data/models/user'
+import { ApiResult } from '../utils/commonTypes'
+
+let usersClient: UsersClient
+let response: ApiResult<any>
 
 describe('GET users', () => {
     beforeAll(() => {})
     afterAll(() => {})
 
-    beforeEach(() => {})
+    beforeEach(() => {
+        usersClient = new UsersClient()
+    })
     afterEach(() => {})
 
-    test('success', async () => {
-        let response: AxiosResponse<User[]>
-        try {
-            response = await axios.get('/api/users')
-        } catch (error) {
-            response = error.response
-        }
-        expect(response.status).toBe(200)
-        expect(response.data).toHaveLength(10)
-        expect(response.data[0]).toHaveProperty('id')
-        expect(response.data[0]).toHaveProperty('email')
-        expect(response.data[0]).toHaveProperty('gender')
-        expect(response.data[0]).toHaveProperty('status')
-        expect(response.data[0]).toHaveProperty('name')
+    test('returns list successfully', async () => {
+        response = await usersClient.getUsers()
+        expect(response.data?.data).toHaveLength(6)
+
+        const users: User[] = response.data!.data
+
+        expect(users[0]).toHaveProperty('id')
+        expect(users[0]).toHaveProperty('email')
+        expect(users[0]).toHaveProperty('first_name')
+        expect(users[0]).toHaveProperty('last_name')
+        expect(users[0]).toHaveProperty('avatar')
     })
 })

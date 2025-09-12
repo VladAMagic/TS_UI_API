@@ -1,37 +1,18 @@
-import axios, { AxiosResponse } from "axios"
-import { User } from "../data/models/user"
+import axios from 'axios'
+import { User, UsersResponse } from '../data/models/user'
+import { ApiResult } from '../utils/commonTypes'
+import BaseClient from './clientBase'
 
-export default class Users{
-  
-  async getUsers(): Promise<User[]> {
-    let response: AxiosResponse<User[]>|undefined
-    try {
-      response = await axios.get('/api/users')
-    } catch (error) {
-      response = error.response
+export default class UsersClient extends BaseClient {
+    async getUsers(): Promise<ApiResult<UsersResponse>> {
+        return this.handleRequest(() => axios.get('/api/users'))
     }
 
-    return response.data
-  }
-
-  async getUser(id: number): Promise<User> {
-    let response: AxiosResponse<User> 
-    try {
-      response = await axios.get(`/api/users/${id}`)
-    } catch (error) {
-      response = error.response
-  }
-    return response.data
-  }
-
-  async createUser(user: User): Promise<User> {
-    let response: AxiosResponse<User>
-    try {
-      response = await axios.post('/api/users', user)
-    } catch (error) {
-      response = error.response
+    async getUser(id: number): Promise<ApiResult<User>> {
+        return this.handleRequest(() => axios.get(`/api/users/${id}`))
     }
 
-    return response.data
-  }
+    async createUser(user: User): Promise<ApiResult<User>> {
+        return this.handleRequest(() => axios.post('/api/users', user))
+    }
 }

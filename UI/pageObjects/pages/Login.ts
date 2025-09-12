@@ -48,7 +48,7 @@ export default class Login extends BasePage {
         )
     }
 
-    async validateInvalidPasswordErrorMessage(): Promise<void> {
+    async validateInvalidUserPasswordErrorMessage(): Promise<void> {
         await expect(this.errorMessage).toBeVisible()
         await expect(this.errorMessage).toContainText(
             'Epic sadface: Username and password do not match any user in this service',

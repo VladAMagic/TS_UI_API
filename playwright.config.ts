@@ -5,7 +5,7 @@ import { defineConfig, devices } from '@playwright/test'
  */
 import dotenv from 'dotenv'
 
-dotenv.config({ path: './playwright/.env' })
+dotenv.config({ path: './UI/.env' })
 
 /**
  * See https://playwright.dev/docs/test-configuration.
@@ -21,7 +21,7 @@ export default defineConfig({
     /* Opt out of parallel tests on CI. */
     workers: process.env.CI ? 1 : 1,
     /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-    reporter: 'html',
+    reporter: [['html', { outputFolder: './test-results/UI-test-results' }]],
     timeout: process.env.CI ? 60 * 1000 : 40 * 1000,
     expect: { timeout: process.env.CI ? 60 * 1000 : 20 * 1000 },
     maxFailures: process.env.CI ? 3 : undefined,
@@ -33,7 +33,7 @@ export default defineConfig({
         trace: 'on-first-retry',
     },
     /* Used to add a timeout after server startup if needed for*/
-    globalSetup: './playwright/support/global-setup.ts',
+    globalSetup: './UI/support/global-setup.ts',
     /* Configure projects for major browsers */
     projects: [
         {
@@ -46,7 +46,7 @@ export default defineConfig({
                 locale: 'en-US',
                 viewport: { width: 1800, height: 900 },
             },
-            testMatch: 'playwright/tests/**/*.spec.ts',
+            testMatch: 'UI/tests/**/*.spec.ts',
         },
     ],
 

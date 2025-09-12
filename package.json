@@ -3,7 +3,7 @@
     "version": "1.0.0",
     "main": "index.js",
     "scripts": {
-        "UI:test": "",
+        "UI:test": "playwright test",
         "API:test": "jest",
         "format": "prettier --write ."
     },
@@ -12,10 +12,12 @@
     "license": "ISC",
     "description": "",
     "devDependencies": {
+        "@faker-js/faker": "^9.9.0",
         "@playwright/test": "^1.55.0",
         "@types/jest": "^30.0.0",
         "@types/node": "^24.3.1",
         "jest": "^30.1.3",
+        "jest-html-reporter": "^4.3.0",
         "ts-jest": "^29.4.1"
     },
     "dependencies": {

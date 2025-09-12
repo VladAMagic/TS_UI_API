@@ -28,6 +28,14 @@ test.describe('Login Page user', async () => {
     test('should not login with invalid password', async ({ loginPage }) => {
         await loginPage.validateVisible()
         await loginPage.login(process.env.STANDARD_USER!, 'invalid_password')
-        await loginPage.validateInvalidPasswordErrorMessage()
+        await loginPage.validateInvalidUserPasswordErrorMessage()
+    })
+
+    test('should not login with nonexistent username', async ({
+        loginPage,
+    }) => {
+        await loginPage.validateVisible()
+        await loginPage.login('nonexistent_user', defaultPassword)
+        await loginPage.validateInvalidUserPasswordErrorMessage()
     })
 })
