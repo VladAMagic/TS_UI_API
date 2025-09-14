@@ -1,5 +1,7 @@
 import { Locator, Page, expect } from '@playwright/test'
 import BasePage from '../BasePage.ts'
+import { ProductListEnum } from '../../data/productList.ts'
+import Product from './Product.ts'
 
 export default class Inventory extends BasePage {
     readonly page: Page
@@ -31,7 +33,7 @@ export default class Inventory extends BasePage {
     }
 
     private get productItems(): Locator {
-        return this.page.locator('.inventory_item')
+        return this.page.locator('.inventory_item .inventory_item_label .inventory_item_name')
     }
 
     private get productNames(): Locator {
@@ -42,8 +44,16 @@ export default class Inventory extends BasePage {
         return this.page.locator('.inventory_item_price')
     }
 
+    private get productContainers(): Locator {
+        return this.page.locator('.inventory_item')
+    }
+
     private get addToCartButtons(): Locator {
         return this.page.locator('button[id^="add-to-cart"]')
+    }
+
+    private get removeFromCartButton(): Locator {
+        return this.page.locator('button[id^="remove"]')
     }
 
     constructor(page: Page) {
@@ -72,5 +82,27 @@ export default class Inventory extends BasePage {
 
     async openHamburgerMenu(): Promise<void> {
         await this.hamburgerMenu.click()
+    }
+
+    async addNthProductToCart(productName: ProductListEnum): Promise<void> {
+        await this.productContainers.filter({ hasText: productName }).locator(this.addToCartButtons).click()
+        await expect(this.productContainers.filter({ hasText: productName }).locator(this.removeFromCartButton)).toBeVisible()
+    }
+
+    async removeProductFromCart(productName: ProductListEnum): Promise<void> {
+        await this.productContainers.filter({ hasText: productName }).locator(this.removeFromCartButton).click()
+    }
+    
+    async navigateToProductPage(productName: ProductListEnum): Promise<Product> {
+        await this.productItems.filter({ hasText: productName }).click()
+        return new Product(this.page)
+    }
+
+    async validateProductAddedToCart(productName: ProductListEnum): Promise<void> {
+        await expect(this.productContainers.filter({ hasText: productName }).locator(this.removeFromCartButton)).toBeVisible()
+    }
+
+    async validateProductRemovedFromCart(productName: ProductListEnum): Promise<void> {
+        await expect(this.productContainers.filter({ hasText: productName }).locator(this.removeFromCartButton)).not.toBeVisible()
     }
 }
