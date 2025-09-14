@@ -138,3 +138,5 @@ dist
 package-lock.json
 /test-results
 /playwright-report
+API-test-results/test-report.html
+UI-test-results/index.html

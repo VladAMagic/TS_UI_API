@@ -5,7 +5,7 @@ import { defineConfig, devices } from '@playwright/test'
  */
 import dotenv from 'dotenv'
 
-dotenv.config({ path: './UI/.env' })
+dotenv.config()
 
 /**
  * See https://playwright.dev/docs/test-configuration.
@@ -21,14 +21,14 @@ export default defineConfig({
     /* Opt out of parallel tests on CI. */
     workers: process.env.CI ? 1 : 1,
     /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-    reporter: [['html', { outputFolder: './test-results/UI-test-results' }]],
+    reporter: [['html', { outputFolder: './UI-test-results/' }]],
     timeout: process.env.CI ? 60 * 1000 : 40 * 1000,
     expect: { timeout: process.env.CI ? 60 * 1000 : 20 * 1000 },
     maxFailures: process.env.CI ? 3 : undefined,
     /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
     use: {
         /* Base URL to use in actions like `await page.goto('/')`. */
-        baseURL: 'https://www.saucedemo.com/',
+        baseURL: process.env.UI_BASE_URL,
         /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
         trace: 'on-first-retry',
     },
