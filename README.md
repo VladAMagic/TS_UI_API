@@ -29,6 +29,11 @@ CI=false
 API_BASE_URL=https://reqres.in
 UI_BASE_URL=https://www.saucedemo.com/
 ```
+Using terminal:
+```bash
+echo -e "DEFAULT_PASSWORD=secret_sauce\nSTANDARD_USER=standard_user\nLOCKED_OUT_USER=locked_out_user\nPROBLEM_USER=problem_user\nERROR_USER=error_user\nVISUAL_USER=visual_user\nCI=false\nAPI_BASE_URL=https://reqres.in\nUI_BASE_URL=https://www.saucedemo.com/" > .env
+```
+
 (Kept sensitive information here for the purpose of this current interview. otherwise it would be represented as {{ secrets.DEFAULT_PASSWORD }} )
 
 5. Execute API tests using cmd:
