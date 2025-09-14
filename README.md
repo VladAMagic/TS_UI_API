@@ -17,7 +17,12 @@ https://docs.npmjs.com/downloading-and-installing-node-js-and-npm
    npm install
    ```
 
-4. Create a .env file in this folder. See example:
+4. Install playwright dependencies using cmd:
+```bash
+npx playwright install
+```
+
+5. Create a .env file in this folder. See example:
 ```
 DEFAULT_PASSWORD=secret_sauce
 STANDARD_USER=standard_user
@@ -36,17 +41,17 @@ echo -e "DEFAULT_PASSWORD=secret_sauce\nSTANDARD_USER=standard_user\nLOCKED_OUT_
 
 (Kept sensitive information here for the purpose of this current interview. otherwise it would be represented as {{ secrets.DEFAULT_PASSWORD }} )
 
-5. Execute API tests using cmd:
+6. Execute API tests using cmd:
 ```bash
 npm run API:test
 ```
 
-6. Execute UI tests using cmd:
+7. Execute UI tests using cmd:
 ```bash
 npm run UI:test
 ```
 
-7. Locate test results in API-test-results and/or in UI-test-results folder respectivly.
+8. Locate test results in API-test-results and/or in UI-test-results folder respectivly, the /html files.
 
 ## Project Structure
 - `API/` - API tests using Jest and Axios

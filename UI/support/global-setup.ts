@@ -1,5 +1,5 @@
 export default async function globalSetup() {
-    const timeout = 10000
+    const timeout = 1000
     console.log(
         'Waiting an additional ' +
             timeout +
