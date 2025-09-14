@@ -6,7 +6,7 @@ A TypeScript-based testing framework combining API testing with Jest/Axios and U
 - Node.js (v16 or higher)
 - npm
 
-How to run:
+## How to run:
 1. Install NPM on your machine
 https://docs.npmjs.com/downloading-and-installing-node-js-and-npm
 
@@ -51,5 +51,5 @@ npm run UI:test
 - `UI/pageObjects/` - Page Objects
 
 
-Extra notes:
+## Extra notes:
 Looking back on this solution, it might have been a good ideea to go with playwright for the API testing also, but i haven't really used it for the purpose of fully testing an API so far, so i just instictivly went with the JEST&Axios solution.
